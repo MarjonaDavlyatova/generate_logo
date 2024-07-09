@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Генератор логотипов</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .form-control:focus {
+            border-color: #00bfa5;
+            box-shadow: 0 0 0 0.2rem rgba(0, 191, 165, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .text-primary {
+            color: #007bff !important;
+        }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+        h1 {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Генератор логотипов</h1>
+        <form method="post" onsubmit="showLoader()">
+            <div class="mb-3">
+                <label for="forma" class="form-label text-primary">Форма:</label>
+                <input type="text" class="form-control" id="forma" name="forma" required>
+            </div>
+            <div class="mb-3">
+                <label for="style" class="form-label text-primary">Стиль:</label>
+                <input type="text" class="form-control" id="style" name="style" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label text-primary">Описание:</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Сгенерировать логотип</button>
+        </form>
+        <div id="loading" class="text-center my-4" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        {% if image %}
+            <div id="result" class="text-center my-4">
+                <h2 class="text-primary">Сгенерированный логотип:</h2>
+                <img src="{{ image }}" alt="Generated Logo" class="img-fluid" width="300px">
+            </div>
+        {% elif error %}
+            <div id="result" class="text-center my-4">
+                <h2 class="text-danger">{{ error }}</h2>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script>
+        function showLoader() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
